@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<h1>HOME PAGE</h1>
 
-	<h1>HOME PAGE HEHEHEHHE</h1>
-	
 	<h2>${primo}</h2>
 </body>
 </html>
