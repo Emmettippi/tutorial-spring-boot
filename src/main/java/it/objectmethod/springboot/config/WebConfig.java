@@ -5,16 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = "it.objectmethod.springboot")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
 	//Logger log = Logger.getLogger(this.getClass());
@@ -27,9 +23,10 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		//log.debug("Path js: "+path);
+		System.out.println("Path js: " + jsPath);
 		if (!registry.hasMappingForPattern("/js/**")) {
-			registry.addResourceHandler("/js/**").addResourceLocations("file:" + jsPath);
+			registry.addResourceHandler("/js/**")
+				.addResourceLocations(jsPath);
 		}
 	}
 

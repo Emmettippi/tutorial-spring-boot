@@ -11,18 +11,9 @@
 <script type="text/javascript" src="js/country.js"></script>
 </head>
 <body>
-	<c:if test="${loading}">
-		Loading...
-	</c:if>
-	<c:if test="${country}">
-		<h3>Modifica Nazione</h3>
-	</c:if>
+	<div id="loadingDiv"></div>
+	<div id="countryDiv"></div>
 	<button onclick="newCountry()">Nuova Nazione</button>
-	<c:if test="${countryList}">
-		<h3>Lista delle Nazioni</h3>
-		<c:forEach items="${countryList}" var="country">
-			<a  href="#" onclick="getCountry(${country.id})">${country.name}</a>
-		</c:forEach>
-	</c:if>
+	<div id="countryListDiv"></div>
 </body>
 </html>
