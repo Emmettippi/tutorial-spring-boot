@@ -5,7 +5,6 @@ HELP.md
 ### STS ###
 .apt_generated
 .factorypath
-.project
 .settings
 .springBeans
 .sts4-cache
