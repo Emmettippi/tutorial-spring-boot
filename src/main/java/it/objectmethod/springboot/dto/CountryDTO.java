@@ -1,5 +1,7 @@
 package it.objectmethod.springboot.dto;
 
+import java.util.List;
+
 public class CountryDTO {
 
 	private Long id;
