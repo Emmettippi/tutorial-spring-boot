@@ -10,7 +10,7 @@ import javax.persistence.Table;
 public class Country {
 
 	@Id
-	@Column(name = "idcountry", nullable = false)
+	@Column(name = "idcountry", insertable = true, updatable = true, unique = true, nullable = false)
 	private Long id;
 
 	@Column(name = "name")

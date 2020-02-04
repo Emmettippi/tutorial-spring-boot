@@ -3,13 +3,16 @@ var countryList = null;
 
 loading = (_loading) => {
 	if (_loading) {
-		$("#countryDiv").html('Loading...');
+		$("#loadingDiv").html('Loading...');
 	} else {
-		$("#countryDiv").html('');
+		$("#loadingDiv").html('');
 	}
 	$("#newCountryBtn").attr("disabled", _loading);
 	if ($("#deleteCountryBtn") && $("#deleteCountryBtn").length) {
 		$("#deleteCountryBtn").attr("disabled", _loading);
+	}
+	if ($("#saveCountryBtn") && $("#saveCountryBtn").length) {
+		$("#saveCountryBtn").attr("disabled", _loading);
 	}
 }
 
@@ -19,33 +22,39 @@ newCountry = () => {
 			name: "",
 			code: ""
 	}
+	populateCountryDiv(true);
 }
 
 onCountryCodeChange = () => {
-	var countryCode = $("#countryCode").value;
+	console.log($("#countryCode")[0]);
+	var countryCode = $("#countryCode")[0].value;
 	country.code = countryCode;
 }
 
 onCountryNameChange = () => {
-	var countryName = $("#countryName").value;
+	console.log($("#countryName")[0]);
+	var countryName = $("#countryName")[0].value;
 	country.name = countryName;
 }
 
-populateCountryDiv = (empty) => {
-	if (empty) {
+populateCountryDiv = (full) => {
+	if (!full) {
 		$("#countryDiv").html('');
 	} else {
 		var innerHtml = 'Codice: <input type="text" id="countryCode" value="' + country.code + '" /> <br>';
 		innerHtml += 'Nome: <input type="text" id="countryName" value="' + country.name + '" /> <br>';
-		innerHtml += '<button id="deleteCountryBtn" onclick="deleteCountry()">Cancella Nazione</button> <br>';
+		innerHtml += '<button id="saveCountryBtn" onclick="saveCountry()">Salva</button> <br>';
+		if (country.id) {
+			innerHtml += '<button id="deleteCountryBtn" onclick="deleteCountry()">Cancella Nazione</button> <br>';
+		}
 		$("#countryDiv").html(innerHtml);
-		$("#countryCode").addEventListener("keyup", onCountryCodeChange);
-		$("#countryName").addEventListener("keyup", onCountryNameChange);
+		$("#countryCode").keyup(onCountryCodeChange);
+		$("#countryName").keyup(onCountryNameChange);
 	}
 }
 
-populateCountryListDiv = (empty) => {
-	if (empty) {
+populateCountryListDiv = (full) => {
+	if (!full) {
 		$("#countryListDiv").html('');
 	} else {
 		var innerHtml = '<ul>';
@@ -68,7 +77,7 @@ getCountry = (id) => {
 	}).done((data) => {
 		loading(false);
 		country = data;
-		populateCountryDiv(false);
+		populateCountryDiv(true);
 	}).fail((error) => {
 		console.log(error);
 		loading(false);
@@ -78,14 +87,15 @@ getCountry = (id) => {
 saveCountry = () => {
 	loading(true);
 	$.ajax({
-		url: '/world/api/country/save',
+		url: '/world/api/country',
 		type: 'POST',
 		contentType: 'application/json',
 		dataType: 'json',
 		data: JSON.stringify(country)
 	}).done((data) => {
-		loading(false);
 		country = data;
+		populateCountryDiv(true);
+		getCountryList();
 	}).fail((error) => {
 		console.log(error);
 		loading(false);
@@ -100,7 +110,7 @@ deleteCountry = () => {
 			type: 'DELETE'
 		}).done(() => {
 			loading(false);
-			populateCountryDiv(true);
+			populateCountryDiv(false);
 			getCountryList();
 		}).fail((error) => {
 			console.log(error);
@@ -118,7 +128,7 @@ getCountryList = () => {
 	}).done((data) => {
 		loading(false);
 		countryList = data;
-		populateCountryListDiv(false);
+		populateCountryListDiv(true);
 	}).fail((error) => {
 		console.log(error);
 		loading(false);

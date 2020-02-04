@@ -23,7 +23,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		System.out.println("Path js: " + jsPath);
+		// System.out.println("Path js: " + jsPath);
 		if (!registry.hasMappingForPattern("/js/**")) {
 			registry.addResourceHandler("/js/**")
 				.addResourceLocations(jsPath);

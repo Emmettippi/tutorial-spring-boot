@@ -24,6 +24,10 @@ public class CountryService {
 
 	public CountryDTO save(CountryDTO countryDto) {
 		Country country = countryMapper.toEntity(countryDto);
+		if (country != null && country.getId() == null) {
+			Country c = countryRepository.findTopByOrderByIdDesc();
+			country.setId(c == null ? 1L : (c.getId() + 1));
+		}
 		country = countryRepository.save(country);
 		return countryMapper.toDto(country);
 	}

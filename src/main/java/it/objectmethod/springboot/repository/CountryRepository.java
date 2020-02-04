@@ -8,4 +8,5 @@ import it.objectmethod.springboot.model.Country;
 @Repository
 public interface CountryRepository extends JpaRepository<Country, Long> {
 
+	public Country findTopByOrderByIdDesc();
 }
