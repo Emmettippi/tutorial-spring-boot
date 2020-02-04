@@ -11,9 +11,9 @@
 <script type="text/javascript" src="js/country.js"></script>
 </head>
 <body>
-	<div id="loadingDiv"></div>
 	<div id="countryDiv"></div>
-	<button onclick="newCountry()">Nuova Nazione</button>
+	<button id="newCountryBtn" onclick="newCountry()">Nuova Nazione</button>
+	<div id="loadingDiv"></div>
 	<div id="countryListDiv"></div>
 </body>
 </html>

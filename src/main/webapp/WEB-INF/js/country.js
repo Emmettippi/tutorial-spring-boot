@@ -1,6 +1,17 @@
 var country = null;
 var countryList = null;
-var loading = false;
+
+loading = (_loading) => {
+	if (_loading) {
+		$("#countryDiv").html('Loading...');
+	} else {
+		$("#countryDiv").html('');
+	}
+	$("#newCountryBtn").attr("disabled", _loading);
+	if ($("#deleteCountryBtn") && $("#deleteCountryBtn").length) {
+		$("#deleteCountryBtn").attr("disabled", _loading);
+	}
+}
 
 newCountry = () => {
 	country = {
@@ -10,55 +21,33 @@ newCountry = () => {
 	}
 }
 
-getCountry = (id) => {
-	country = null;
-	loading = true;
-	$.ajax({
-		url: '/world/api/country/' + id,
-		type: 'GET'
-	}).done((data) => {
-		loading = false;
-		country = data;
-	});
+onCountryCodeChange = () => {
+	var countryCode = $("#countryCode").value;
+	country.code = countryCode;
 }
 
-saveCountry = () => {
-	loading = true;
-	$.ajax({
-		url: '/world/api/country/save',
-		type: 'POST',
-		contentType: 'application/json',
-		dataType: 'json',
-		data: JSON.stringify(country)
-	}).done((data) => {
-		loading = false;
-		country = data;
-	});
+onCountryNameChange = () => {
+	var countryName = $("#countryName").value;
+	country.name = countryName;
 }
 
-deleteCountry = () => {
-	if (confirm('Sei sicuro di voler eliminare questa nazione?')) {
-		loading = true;
-		$.ajax({
-			url: '/world/api/country/' + country.id,
-			type: 'DELETE'
-		}).done(() => {
-			loading = false;
-			getCountryList();
-		});
+populateCountryDiv = (empty) => {
+	if (empty) {
+		$("#countryDiv").html('');
+	} else {
+		var innerHtml = 'Codice: <input type="text" id="countryCode" value="' + country.code + '" /> <br>';
+		innerHtml += 'Nome: <input type="text" id="countryName" value="' + country.name + '" /> <br>';
+		innerHtml += '<button id="deleteCountryBtn" onclick="deleteCountry()">Cancella Nazione</button> <br>';
+		$("#countryDiv").html(innerHtml);
+		$("#countryCode").addEventListener("keyup", onCountryCodeChange);
+		$("#countryName").addEventListener("keyup", onCountryNameChange);
 	}
 }
 
-getCountryList = () => {
-	countryList = null;
-	loading = true;
-	$.ajax({
-		url: '/world/api/country/all',
-		type: 'GET'
-	}).done((data) => {
-		loading = false;
-		countryList = data;
-		console.log(countryList);
+populateCountryListDiv = (empty) => {
+	if (empty) {
+		$("#countryListDiv").html('');
+	} else {
 		var innerHtml = '<ul>';
 		for (var i=0; i<countryList.length; i++) {
 			innerHtml += '<li>';
@@ -67,6 +56,72 @@ getCountryList = () => {
 		}
 		innerHtml += '</ul>';
 		$("#countryListDiv").html(innerHtml);
+	}
+}
+
+getCountry = (id) => {
+	country = null;
+	loading(true);
+	$.ajax({
+		url: '/world/api/country/' + id,
+		type: 'GET'
+	}).done((data) => {
+		loading(false);
+		country = data;
+		populateCountryDiv(false);
+	}).fail((error) => {
+		console.log(error);
+		loading(false);
+	});
+}
+
+saveCountry = () => {
+	loading(true);
+	$.ajax({
+		url: '/world/api/country/save',
+		type: 'POST',
+		contentType: 'application/json',
+		dataType: 'json',
+		data: JSON.stringify(country)
+	}).done((data) => {
+		loading(false);
+		country = data;
+	}).fail((error) => {
+		console.log(error);
+		loading(false);
+	});
+}
+
+deleteCountry = () => {
+	if (confirm('Sei sicuro di voler eliminare la nazione' + country.name + '?')) {
+		loading(true);
+		$.ajax({
+			url: '/world/api/country/' + country.id,
+			type: 'DELETE'
+		}).done(() => {
+			loading(false);
+			populateCountryDiv(true);
+			getCountryList();
+		}).fail((error) => {
+			console.log(error);
+			loading(false);
+		});
+	}
+}
+
+getCountryList = () => {
+	countryList = null;
+	loading(true);
+	$.ajax({
+		url: '/world/api/country/all',
+		type: 'GET'
+	}).done((data) => {
+		loading(false);
+		countryList = data;
+		populateCountryListDiv(false);
+	}).fail((error) => {
+		console.log(error);
+		loading(false);
 	});
 }
 
