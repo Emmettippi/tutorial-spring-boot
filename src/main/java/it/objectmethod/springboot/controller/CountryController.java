@@ -41,4 +41,33 @@ public class CountryController {
 		countryService.delete(id);
 	}
 
+	@GetMapping("/country/id/{id}/greater-or-equal")
+	public List<CountryDTO> findByIdGreaterOrEqualsThan(@PathVariable Long id) {
+		return countryService.findByIdGreaterOrEqualsThan(id);
+	}
+
+	@GetMapping("/country/code/{code}/like")
+	public List<CountryDTO> findByCodeContaining(@PathVariable String code) {
+		return countryService.findByCodeContaining(code);
+	}
+
+	@GetMapping("/country/name/null")
+	public List<CountryDTO> findByNameIsNull() {
+		return countryService.findByNameIsNull();
+	}
+
+	@GetMapping("/country/name/{name}/starts-with")
+	public List<CountryDTO> findByNameStartingWithOrderById(@PathVariable String name) {
+		return countryService.findByNameStartingWithOrderById(name);
+	}
+
+	@GetMapping("/country/code/{code}")
+	public CountryDTO findByCode(@PathVariable String code) {
+		return countryService.findByCode(code);
+	}
+
+	@GetMapping("/country/name/{name}/ends-with")
+	public List<CountryDTO> findByNameEndingWithOrderByCodeDesc(@PathVariable String name) {
+		return countryService.findByNameEndingWithOrderByCodeDesc(name);
+	}
 }

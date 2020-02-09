@@ -45,4 +45,29 @@ public class CountryService {
 		countryRepository.delete(id);
 	}
 
+	public List<CountryDTO> findByIdGreaterOrEqualsThan(Long id) {
+		return countryMapper.toDto(countryRepository.findByIdGreaterThanEqual(id));
+	}
+
+	public List<CountryDTO> findByCodeContaining(String code) {
+		return countryMapper.toDto(countryRepository.findByCodeContaining(code));
+	}
+
+	public List<CountryDTO> findByNameIsNull() {
+		return countryMapper.toDto(countryRepository.findByNameIsNull());
+	}
+
+	public List<CountryDTO> findByNameStartingWithOrderById(String name) {
+		return countryMapper.toDto(countryRepository.findByNameStartingWithOrderById(name));
+	}
+
+	public CountryDTO findByCode(String code) {
+		Country country = countryRepository.findByCode(code);
+		return countryMapper.toDto(country);
+	}
+
+	public List<CountryDTO> findByNameEndingWithOrderByCodeDesc(String name) {
+		List<Country> countries = countryRepository.findByNameEndingWithOrderByCodeDesc(name);
+		return countryMapper.toDto(countries);
+	}
 }
