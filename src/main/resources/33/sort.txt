@@ -1,0 +1,13 @@
+public long[] sort(long[] array) {
+	long tmp;
+	for (int i = 0; i < array.length; i++) {
+		for (int j = i; j < array.length; j++) {
+			if (array[i] < array[j]) {
+				tmp = array[i];
+				array[i] = array[j];
+				array[j] = tmp;
+			}
+		}
+	}
+	return array;
+}

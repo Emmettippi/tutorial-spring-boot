@@ -1,0 +1,11 @@
+public int occurrences(List<Long> longList, Long confront) {
+	int occurrences = 0;
+	if (longList != null && confront != null){
+		for (Long number : longList) {
+			if (number == confront) {
+				occurrences++;
+			}
+		}
+	}
+	return occurrences;
+}
