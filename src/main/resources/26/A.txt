@@ -1,0 +1,4 @@
+"property": {
+	"someProperty": "someValue"
+	, "array": false
+}

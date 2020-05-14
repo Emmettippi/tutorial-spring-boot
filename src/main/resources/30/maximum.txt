@@ -1,9 +1,0 @@
-public long getMaximum(long[] array) {
-	long max = array[0];
-	for (int i = 1; 1 < array.length; i++) {
-		if (max < array[i]) {
-			max = array[i];
-		}
-	}
-	return max;
-}

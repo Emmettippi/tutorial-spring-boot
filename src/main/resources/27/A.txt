@@ -1,0 +1,12 @@
+{
+	"id": 4
+	, "name": "Vanessa"
+	, "lastnme": "Bianchi"
+	, "classe": "2B"
+}
+, {
+	"id": 8
+	, "name": "Giovanni"
+	, "lastnme": "Rossi"
+	, "classe": "1F"
+}

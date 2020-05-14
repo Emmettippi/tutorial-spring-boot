@@ -1,0 +1,11 @@
+public Student getCountryByCode(String code) {
+	Student student = null;
+	if (code != null && !code.isEmpty()) {
+		String sql = "SELECT * FROM student WHERE code = :code";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("code", code);
+		BeanPropertyRowMapper<Student> rm = new BeanPropertyRowMapper<Student>(Student.class);
+		student = getNamedParameterJdbcTemplate().queryForObject(sql, params, rm);
+	}
+	return student;
+}

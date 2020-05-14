@@ -1,0 +1,20 @@
+[
+	{
+		"id": 5
+		, "name": "Vanessa"
+		, "lastnme": "Neri"
+		, "classe": "2C"
+	}
+	, {
+		"id": 3
+		, "name": "Giovanni"
+		, "lastnme": "Rossi"
+		, "classe": "4A"
+	}
+	, {
+		"id": 45
+		, "name": "Valerio"
+		, "lastnme": "Bianchi"
+		, "classe": "1B"
+	}
+]

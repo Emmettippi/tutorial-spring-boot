@@ -1,0 +1,5 @@
+{
+	"arrayProperty": {}
+	, "numero": false
+	, "stringa": null
+}

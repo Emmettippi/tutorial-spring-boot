@@ -21,7 +21,7 @@ newCountry = () => {
 			id: null,
 			name: "",
 			code: ""
-	}
+	};
 	populateCountryDiv(true);
 }
 

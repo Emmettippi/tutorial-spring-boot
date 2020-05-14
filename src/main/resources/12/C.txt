@@ -1,0 +1,5 @@
+public List<Student> getStudents() {
+	String sql = "SELECT * FROM student";
+	List<Student> students = getNamedParameterJdbcTemplate().query(sql, new StudentMapper());
+	return students;
+}

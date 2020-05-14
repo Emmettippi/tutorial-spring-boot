@@ -1,0 +1,17 @@
+public int algoritmo(int input) {
+	int a = 3;
+	int b = input / a;
+	int c = input % a;
+	int d = b * c + a * a;
+	if (d % 3 == 0) {
+		b = d - a;
+		c--; // 1
+		d = b * c;
+	} else {
+		c = d - a;
+		b--;
+		d = a * b * c;
+	}
+	System.out.println(d);
+	return d;
+}

@@ -1,0 +1,9 @@
+[
+	3
+	, "ciao"
+	, null
+	, "null"
+	, {
+		"property": "something"
+	}
+]

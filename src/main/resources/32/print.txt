@@ -1,9 +1,0 @@
-public void printStar(long[][][] multiArray) {
-	for (int i = 0; i < multiArray.length; i++) {
-		for (int j = 0; j < multiArray.length; j++) {
-			for (int k = 0; k < multiArray.length; k++) {
-				System.out.println("*");
-			}
-		}
-	}
-}

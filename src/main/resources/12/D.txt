@@ -1,0 +1,11 @@
+public Student getStudentById(Long id) {
+	Student student = null;
+	if (id != null) {
+		String sql = "SELECT * FROM student WHERE id = :id";
+		MapSqlParameterSource params = new MapSqlParameterSource();
+		params.addValue("id", id);
+		BeanPropertyRowMapper<Student> rm = new BeanPropertyRowMapper<Student>(Student.class);
+		student = getNamedParameterJdbcTemplate().queryForObject(sql, params, rm);
+	}
+	return student;
+}

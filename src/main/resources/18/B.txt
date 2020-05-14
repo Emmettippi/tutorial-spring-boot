@@ -1,0 +1,6 @@
+SELECT
+	s.name
+	, s.lastname
+	, s.age
+FROM
+	student s
